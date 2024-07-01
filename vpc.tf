@@ -8,10 +8,15 @@ resource "aws_vpc" "vpc1" {
     env="dev"
   }
 }
+#Nat Gateway 
 
-#internet gateway
-resource "aws_internet_gateway" "gtw1" {
-  vpc_id = aws_vpc.vpc1.id
+resource "aws_eip" "el1" {
+  
+}
+
+resource "aws_nat_gateway" "nat1" {
+  allocation_id = aws_eip.el1.id
+  subnet_id = aws_subnet.public1.id
 }
 
 # public subnet
